@@ -1,6 +1,9 @@
-import { createStore } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import promise from "redux-promise-middleware";
 import breakingBad from "./ducks/breakingBad";
+import starWars from "./ducks/starWars";
 
-const store = createStore(breakingBad);
+const rootReducer = combineReducers({ breakingBad: breakingBad, starWars });
+const store = createStore(rootReducer, applyMiddleware(promise));
 
 export default store;
