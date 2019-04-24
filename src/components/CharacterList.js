@@ -33,8 +33,13 @@ class CharacterList extends Component {
   render() {
     console.log(this.props);
     return (
-      <div style={{ display: "flex", borderBottom: "1px solid gray" }}>
-        <aside style={{ borderRight: "1px solid gray" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly"
+        }}
+      >
+        <aside>
           <h1>Breaking Bad Characters</h1>
           <div>
             {this.state.breakingBadLoading && "Loading..."}
