@@ -25,7 +25,7 @@ class CharacterList extends Component {
     axios.get("https://swapi.co/api/people").then(response => {
       this.setState({
         starWars: response.data.results,
-        breakingBadLoading: false
+        starWarsLoading: false
       });
     });
   }
@@ -46,7 +46,7 @@ class CharacterList extends Component {
         <aside>
           <h1>Star Wars Characters</h1>
           <div>
-            {this.state.breakingBadLoading && "Loading..."}
+            {this.state.starWarsLoading && "Loading..."}
             {this.state.starWars.map(character => {
               return <p key={character.name}>{character.name}</p>;
             })}
