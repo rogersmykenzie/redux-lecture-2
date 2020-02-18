@@ -1,10 +1,10 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
-import breakingBadReducer from './redux/breakingBadReducer';
+import rickMortyReducer from './redux/rickMortyReducer';
 import starWarsReducer from './redux/starWarsReducer';
 import promise from 'redux-promise-middleware';
 
 const combinedReducers = combineReducers({
-    breakingBad: breakingBadReducer, 
+    rickMorty: rickMortyReducer, 
     starWars: starWarsReducer
 });
 

@@ -5,30 +5,33 @@ const initialState = {
   characters: [],
   error: ""
 };
+const GET_RICK_MORTY_CHARACTERS = "GET_RICK_MORTY_CHARACTERS";
 
-const GET_STAR_WARS_CHARACTERS = "GET_STAR_WARS_CHARACTERS";
-
-export function getStarWarsCharacters() {
+export function getRickMortyCharacters() {
   return {
-    type: GET_STAR_WARS_CHARACTERS,
-    payload: axios.get("https://swapi.co/api/people")
+    type: GET_RICK_MORTY_CHARACTERS,
+    payload: axios.get(
+      "https://rickandmortyapi.com/api/character/"
+    )
   };
 }
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case `${GET_STAR_WARS_CHARACTERS}_FULFILLED`:
+    case `${GET_RICK_MORTY_CHARACTERS}_FULFILLED`:
       return {
         ...state,
         loading: false,
-        characters: action.payload.data.results
+        characters: action.payload.data,
+        error: ""
       };
-    case `${GET_STAR_WARS_CHARACTERS}_PENDING`:
+    case `${GET_RICK_MORTY_CHARACTERS}_PENDING`:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: ""
       };
-    case `${GET_STAR_WARS_CHARACTERS}_REJECTED`:
+    case `${GET_RICK_MORTY_CHARACTERS}_REJECTED`:
       return {
         ...state,
         loading: false,

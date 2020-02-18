@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
 import {getStarWarsCharacters} from '../redux/starWarsReducer';
-import {getBreakingBadCharacters} from '../redux/breakingBadReducer';
-
+import {getRickMortyCharacters} from '../redux/rickMortyReducer';
 
 class CharacterList extends Component {
   componentDidMount() {
+    this.props.getRickMortyCharacters();
     this.props.getStarWarsCharacters();
-    this.props.getBreakingBadCharacters();
   }
   render() {
-    console.log(this.props);
+    console.log(this.props)
     return (
       <div
         style={{
@@ -19,24 +18,25 @@ class CharacterList extends Component {
         }}
       >
         <aside>
-          <h1>Breaking Bad Characters</h1>
+          <h1>Rick & Morty Characters</h1>
           <div>
-            {/* Breaking Bad Characters Here */}
-            {this.props.breakingBad.error}
-            {this.props.breakingBad.loading ? '...Loading'
-            : this.props.breakingBad.characters.map(val => (
-              <p>{val.name}</p>
-            ))}
+            {/* Rick & Morty Characters Here */}
+            {
+              this.props.rickMorty.loading
+                ? 'Loading...'
+                : this.props.rickMorty.error || (this.props.rickMorty.characters.results && this.props.rickMorty.characters.results.map((val, i) => <p key={`bb${i}`}>{val.name}</p>))
+            }
           </div>
         </aside>
         <aside>
           <h1>Star Wars Characters</h1>
           <div>
             {/* Star Wars Characters Here */}
-            {this.props.starWars.loading ? '...Loading'
-            : this.props.starWars.characters.map(val => (
-              <p>{val.name}</p>
-            ))}
+            {
+              this.props.starWars.loading
+                ? 'Loading...'
+                : this.props.starWars.error || this.props.starWars.characters.map((val, i) => <p key={`sw${i}`}>{val.name}</p>)
+            }
           </div>
         </aside>
       </div>
@@ -45,14 +45,14 @@ class CharacterList extends Component {
 }
 
 const mapStateToProps = reduxState => {
-  const {starWars, breakingBad} = reduxState;
+  const {starWars, rickMorty} = reduxState;
   return {
     starWars,
-    breakingBad
+    rickMorty
   }
 }
 export default connect(mapStateToProps, 
   {
-    getStarWarsCharacters,
-    getBreakingBadCharacters
+    getRickMortyCharacters,
+    getStarWarsCharacters
   })(CharacterList);
